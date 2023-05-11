@@ -1,11 +1,30 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include('partials/header') %>
+<!-- Search -->
+<div class="search">
+    <form method="GET" action="/">
+        <input type="text" name="searchTerm" placeholder="Search TV Shows By Title ...">
+        <button type="submit">Search</button>
+    </form>
+</div>
+    <h1>TV Shows</h1>
+    <% if(tvShows.length>1) { %>
+    <div class="tv-shows">
+        <% tvShows.forEach(function(tvshow) { %>
+            <div class="tv-show">
+                <img src="<%= tvshow.poster %>">
+                <h2>
+                    <%= tvshow.title %> (<%= tvshow.year %>)
+                </h2>
+                <form method="POST" action="/favorites?action=addFavorite">
+                    <input type="hidden" name="title" value="<%= tvshow.title %>">
+                    <input type="hidden" name="year" value="<%= tvshow.year %>">
+                    <input type="hidden" name="poster" value="<%= tvshow.poster %>">
+                    <button type="submit">Add to Favorites</button>
+                </form>
+            </div>
+            <% }); %>
+    </div>
+    <% } else { %>
+    <p>No TV Shows found</p>
+    <% } %>
+<%- include('partials/footer') %>

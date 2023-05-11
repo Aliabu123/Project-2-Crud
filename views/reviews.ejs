@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+<h1>Reviewed TV Show Reviews</h1>
+<div class="tv-shows">
+    <% if(reviewedTvShows.length >= 1) { %>
+    <% reviewedTvShows.forEach(function(review) { %>
+        <div class="tv-show">
+            <img src="<%= review.tvShow.poster %>">
+            <h2><%= review.tvShow.title %> (<%= review.tvShow.year %>)</h2>
+            <p>Rating: <%= review.rating  %>/10</p>
+            <p>Review: <%= review.body %></p>
+            <form method="POST" action="/reviews/?reviewId=<%= review._id %>&action=deleteReview">
+                <button type="submit">Remove Review</button>
+            </form>
+        </div>
+    <% }); %>
+    <% } else { %>
+        <p>No Tv Shows Reviewed Yet</p>
+    <% } %>
+</div>
+<div class="review-form">
+ <form method="POST" action="/reviews?action=addReview">
+    <label for="tvshow">Favorite TV Shows:</label>
+    <select name="tvShowId">
+        <% favoriteTvShows.forEach(function(tvshow) { %>
+            <option value="<%= tvshow._id %>"><%= tvshow.title %> (<%= tvshow.year %>)</option>
+        <% }); %>
+    </select><br>
+    <label for="body">Review:</label>
+    <textarea name="review" rows="5" cols="30" required></textarea><br>
+    <label for="rating">Rating:</label>
+    <input type="number" name="rating" min="1" max="10" required><br>
+    <button type="submit">Submit Review</button>
+ </form>
+</div>
+<%- include('partials/footer') %>

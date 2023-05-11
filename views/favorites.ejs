@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<h1>My Favorite TV Shows</h1>
+<div class="tv-shows">
+    <% if(favoriteTvShows.length >= 1) { %>
+    <% favoriteTvShows.forEach(function(favorite) { %>
+        <div class="tv-show">
+            <img src="<%= favorite.poster %>">
+            <h2><%= favorite.title %> (<%= favorite.year %>)</h2>
+            <form method="POST" action="/favorites/?tvShowId=<%= favorite._id %>&action=deleteFavorite">
+                <button type="submit">Remove from Favorites</button>
+            </form>
+        </div>
+    <% }); %>
+    <% } else { %>
+    <div>
+        <p>No Favorite Tv Shows Found</p>
+        <button><a href="/">Add Favorite Tv Shows</a></button>
+    </div>
+    <% } %>
+</div>
+<%- include('partials/footer') %>

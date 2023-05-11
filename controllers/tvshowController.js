@@ -29,13 +29,13 @@ exports.getTvShows = async (req, res) => {
 
     // search tv shows from OMDB API
     const response = await axios.get(
-      `http://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&i=tt3896198&s=${tvShowSearchTerm}`
-    );
-
+      ` https://www.omdbapi.com/?i=tt3896198&apikey=19b1ef9&s=${tvShowSearchTerm} `);
+      // ?i=tt3896198&apikey=19b1ef9rs&s=${tvShowSearchTerm}   );
+      // ?apikey=${process.env.OMDB_API_KEY}&i=tt3896198&s=${tvShowSearchTerm}
     // handle empty response i.e no tv show found with search term
-    if (!response.data.Search) {
-      return res.render("index", { tvShows: [] });
-    }
+    // if (!response.data.Search) {
+    //   return res.render("index", { tvShows: [] });
+    // }
 
     // map response to tv show object
     const tvShows = response.data.Search.map((tvShow) => {
@@ -69,7 +69,7 @@ exports.favoriteTvShow = async (req, res) => {
 const addFavoriteTvShow = async (req, res) => {
   try {
     const response = await axios.get(
-      `http://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&t=${req.body.title}`
+      `http://www.omdbapi.com/?i=tt3896198&apikey=19b1ef9&t=${req.body.title}`
     );
 
     const tvShow = new TvShow({
