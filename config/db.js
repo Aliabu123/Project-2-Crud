@@ -18,7 +18,7 @@
 const mongoose = require("mongoose");
 
 // const mongoURI = 'mongodb://localhost/tv-shows-app';
-const mongoURI = "mongodb://localhost:27017/tv-shows-app";
+const mongoURI = process.env.MONGODB_URL  
 
 const db = async () => {
   try {

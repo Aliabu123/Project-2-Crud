@@ -73,7 +73,7 @@ app.use((error, req, res, next) => {
 });
 
 const HOST = process.env.HOST;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT||3000;
 
 app.listen(PORT, HOST, () => {
   console.log(`App running on: http://${HOST}:${PORT}`);
